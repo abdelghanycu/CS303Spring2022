@@ -62,7 +62,7 @@ export default function App() {
     }
 
     async function getAllFromFireStore() {
-        let APIKEY = 'AIzaSyBEcxYNguBIrk9vfPQ9OcVjI8pViG1deUM';
+        let APIKEY = 'YOUR_API_KEY';
         const loginResponse = await fetch(
             `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${APIKEY}`,
             {
@@ -71,8 +71,8 @@ export default function App() {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    "email": "amabdelghany@sci.cu.edu.eg",
-                    "password": "amabdelghany@sci.cu.edu.eg",
+                    "email": "YOUR_EMAIL",
+                    "password": "YOUR_PASSWORD",
                     "returnSecureToken": true
                 })
             });

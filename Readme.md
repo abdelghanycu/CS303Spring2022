@@ -1,6 +1,6 @@
-#Assignment 5
+# Assignment 5
 
-##Assignment
+## Assignment
 
 1.  Use fetch("https://jsonplaceholder.typicode.com/todos?userId=1") to get a list of todos from the web
 2.  Save the todos list to local storage using AsyncStorage.setItem("Todos", JSON.stringify(todosList))
@@ -10,13 +10,13 @@
 6.  Add a spinner [ActivityIndicator · React Native](https://www.google.com/url?q=https://reactnative.dev/docs/activityindicator&sa=D&source=editors&ust=1648676283037510&usg=AOvVaw1erstwXz8CIOvg5DAOss7f) while getting data.
 7.  Add an offline indicator (yellow label) if the application failed to get data the label should appear.
 
-###Notes:
+### Notes:
 
 I hope you all test your work on mobiles or emulators (not web)
 
 Download a debugger called ReactNativeDebugger [jhen0409/react-native-debugger](https://www.google.com/url?q=https://github.com/jhen0409/react-native-debugger&sa=D&source=editors&ust=1648676283038148&usg=AOvVaw1mOCHsvZkogkE9kfyDlDaH)   to debug localStorage
 ***
-##Async storage
+## Async storage
 
 Here is how to save a single variable: `await AsyncStorage.setItem(“key”, variable);` Here is how to load the variable: `const name = await AsyncStorage.getItem(“key”);`
 
@@ -24,7 +24,7 @@ You might need to use JSON.parse and JSON.stringify in order to save/load json
 
 ***
 
-##API
+## API
 
 Use this fake API server like this:
 
@@ -34,7 +34,7 @@ Use this fake API server like this:
 
 **** * ****
 
-##Fetch
+## Fetch
 
 If you are going to use fetch then try:
 
@@ -49,7 +49,7 @@ A working example for fetch: [Networking](https://www.google.com/url?q=https://w
 
 ***
 
-##Axios
+## Axios
 
 Using Axios:
 ```javascript

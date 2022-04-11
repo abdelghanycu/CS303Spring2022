@@ -1,0 +1,202 @@
+// export default function App() {
+//
+//     async function getData() {
+//         const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={API_KEY}', {
+//             method: 'POST',
+//             headers: {
+//                 Accept: 'application/json',
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify({
+//                 "email": "amabdelghany@sci.cu.edu.eg",
+//                 "password": "amabdelghany@sci.cu.edu.eg",
+//                 "returnSecureToken": true
+//             })
+//         });
+//
+//         const result = await response.json();
+//
+//         const response2 = await fetch(`https://cs303-2022-default-rtdb.firebaseio.com/.json?auth=${result.idToken}`, {
+//             method: 'GET'
+//         });
+//
+//         const result2 = await response2.json();
+//         console.log(result2);
+//     }
+//
+//     function getAllFromFireStoreWithoutToken() {
+//         console.log('Start getAllFromFireStoreWithoutToken API');
+//         axios({
+//             method: 'get',
+//             url: 'https://jsonplaceholder.typicode.com/todos?userId=1',
+//         }).then(function (response) {
+//             console.log(response);
+//             console.log("End: getAllFromFireStoreWithoutToken", response);
+//             return response;
+//         });
+//     }
+//
+//     let key = "dataKeyName";
+//     let defaultValue = [
+//         {text: "picture1", iconSrc: car},
+//         {text: "picture2", iconSrc: splash},
+//         {text: "picture3", iconSrc: favicon},
+//         {text: "picture4", iconSrc: fish},
+//         {text: "picture5", iconSrc: star},
+//         {text: "picture6", iconSrc: earth},
+//         {text: "picture7", iconSrc: icon},
+//     ];
+//
+//     const [data, setDate] = useState([]);
+//
+//
+//     useEffect(() => {
+//         load();
+//         getAllFromFireStoreWithoutToken();
+//         getData();
+//     }, []);
+//
+//     function load() {
+//         AsyncStorage.getItem(key).then(
+//             (value) => {
+//                 if (value) {
+//                     setDate(JSON.parse(value));
+//                 } else {
+//                     setDate(defaultValue);
+//                     AsyncStorage.setItem(key, JSON.stringify(defaultValue));
+//                 }
+//             }
+//         );
+//     }
+//
+//     return (
+//         <ScrollView style={{padding: 20}}>
+//
+//             <View style={[styles.container, styles.horizontal]}>
+//                 <ActivityIndicator animating={data.length === 0}/>
+//                 <ActivityIndicator size="large" animating={data.length === 0}/>
+//                 <ActivityIndicator size="small" color="#0000ff" animating={data.length === 0}/>
+//                 <ActivityIndicator size="large" color="#00ff00" animating={data.length === 0}/>
+//             </View>
+//
+//             <Button title="Click Me" onPress={buttonOnPressMethod}></Button>
+//
+//             {data.map((e, index) => (<Item text={e.text} iconScr={e.iconSrc} key={index}/>))}
+//             <StatusBar style="auto"/>
+//         </ScrollView>
+//     );
+//
+//     async function buttonOnPressMethod() {
+//         AsyncStorage.removeItem(key);
+//         setDate([]);
+//         console.log("here before sleep");
+//         await sleep(5000);
+//         console.log("here after sleep");
+//         load();
+//     }
+//
+//     function sleep(ms) {
+//         return new Promise((resolve) => {
+//             setTimeout(resolve, ms);
+//         });
+//     }
+// }
+
+// export default function App() {
+//     let key = "todos";
+//     let defaultValue = [{text: "abdelghany44", iconSrc: car}, {
+//         text: "mahmoud55",
+//         iconSrc: splash
+//     }, {text: "abdelrahman66", iconSrc: favicon}];
+//
+//     const arr = ["abdelghany11", "mahmoud22", "abdelrahman33"];
+//     // const arrObjects = defaultValue;
+//
+//     // let arrObjects = [];
+//     const [arrObjects, setArrObjects] = useState([]);
+//     // let todoStr = "";
+//
+//     // useEffect(() => {
+//     //     setArrObjects(defaultValue);
+//     // }, []);
+//
+//     // AsyncStorage.setItem(key, JSON.stringify(defaultValue));
+//
+//     useEffect(() => {
+//         AsyncStorage.getItem(key).then(
+//             (value) => {
+//                 if (value) {
+//                     setArrObjects(JSON.parse(value));
+//                 } else {
+//                     setArrObjects(defaultValue);
+//                     AsyncStorage.setItem(key, JSON.stringify(defaultValue));
+//                 }
+//             })
+//     }, []);
+//
+//     // AsyncStorage.setItem('todo', JSON.stringify(arrObjects));
+//     // let todosStr = '';
+//     // AsyncStorage.getItem('todo').then(value => {
+//     //     todosStr = value;
+//     // }).catch(err => {
+//     //     console.log(err);
+//     // });
+//     // console.log(todosStr);
+//     // console.log(AsyncStorage.getItem('todo'));
+//     return (
+//         <ScrollView style={{padding: 20}}>
+//             {arrObjects.map((e, index) => (<Item text={e.text} iconScr={e.iconSrc} key={index}/>))}
+//             {arr.map((e, index) => (<Item text={e} iconScr={car} key={index}/>))}
+//             {/*<Text>-------------------------------------</Text>*/}
+//             {/*<Item text="abdelghany" iconScr={car}></Item>*/}
+//             {/*<Item text="mahmoud" iconScr={icon}></Item>*/}
+//             {/*<Item text="abdelrahman" iconScr={favicon}></Item>*/}
+//             {/*<Text>Some text</Text>*/}
+//             {/*<View>*/}
+//             {/*    <Text>Some more text</Text>*/}
+//             {/*    <Image*/}
+//             {/*        source={{*/}
+//             {/*            uri: 'https://reactnative.dev/docs/assets/p_cat2.png',*/}
+//             {/*        }}*/}
+//             {/*        style={{width: 200, height: 200}}*/}
+//             {/*    />*/}
+//
+//
+//             {/*</View>*/}
+//             {/*<Button title="Press me1"/>*/}
+//             {/*<Button title="Press me2"/>*/}
+//             {/*<Button title="Press me3"/>*/}
+//             {/*<Button title="Press me4"/>*/}
+//             {/*<Button title="Press me5"/>*/}
+//             {/*<Button title="Press me6"/>*/}
+//             {/*<Button title="Press me7"/>*/}
+//             {/*<Button title="Press me8"/>*/}
+//             {/*<Button title="Press me9"/>*/}
+//             {/*<Button title="Press me10"/>*/}
+//             {/*<Button title="Press me11"/>*/}
+//             {/*<Button title="Press me12"/>*/}
+//             {/*<Button title="Press me13"/>*/}
+//             {/*<TouchableOpacity>*/}
+//             {/*    <Image source={icon} style={{width: 50, height: 50, alignItems: 'center'}}/>*/}
+//             {/*</TouchableOpacity>*/}
+//             {/*<TextInput*/}
+//             {/*    style={{*/}
+//             {/*        height: 40,*/}
+//             {/*        borderColor: 'gray',*/}
+//             {/*        borderWidth: 1*/}
+//             {/*    }}*/}
+//             {/*    defaultValue="You can type in me"*/}
+//             {/*/>*/}
+//             {/*<Image source={splash} style={{width: 50, height: 50, alignItems: 'center'}}/>*/}
+//             {/*<View style={{flexDirection: 'row'}}>*/}
+//             {/*    <Image source={car} style={{width: 200, height: 200, alignItems: 'stretch'}}/>*/}
+//             {/*    <Text>Blue Car</Text>*/}
+//             {/*</View>*/}
+//             {/*<Button title="Press me13"/>*/}
+//             {/*<Button title="Press me13"/>*/}
+//             {/*<Button title="Press me13"/>*/}
+//             {/*<Button title="Press me13"/>*/}
+//             <StatusBar style="auto"/>
+//         </ScrollView>
+//     );
+// }

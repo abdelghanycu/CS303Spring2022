@@ -1,11 +1,8 @@
 import {StatusBar} from 'expo-status-bar';
-import {
-    StyleSheet, View, Text, Image, ScrollView,
-    TextInput, Button, TouchableOpacity, ActivityIndicator
-} from 'react-native';
+import {ActivityIndicator, Button, ScrollView, StyleSheet, View} from 'react-native';
 import Item from "./components/Item"
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useState, useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import axios from 'axios';
 
 import splash from "./assets/splash.png"

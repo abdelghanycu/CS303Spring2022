@@ -8,134 +8,92 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 
-import splash from "./assets/splash.png"
-import car from "./assets/car.png"
-import favicon from "./assets/favicon.png"
-import fish from "./assets/fish.png"
-import star from "./assets/star.png"
-import earth from "./assets/earth.png"
-import icon from "./assets/icon.png"
 
-export default function App() {
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-    let key = "dataKeyName";
-    let defaultValue = [
-        {text: "picture1", iconScr: splash},
-        {text: "picture2", iconScr: car},
-        {text: "picture3", iconScr: favicon},
-        {text: "picture4", iconScr: fish},
-        {text: "picture5", iconScr: star},
-        {text: "picture6", iconScr: earth},
-        {text: "picture7", iconScr: icon},
-    ];
+const Stack = createNativeStackNavigator();
 
-    const [data, setDate] = useState([]);
+const Tab = createBottomTabNavigator();
 
-    function load() {
-        AsyncStorage.getItem(key).then(
-            (value) => {
-                if (value) {
-                    setDate(JSON.parse(value));
-                } else {
-                    setDate(defaultValue);
-                    AsyncStorage.setItem(key, JSON.stringify(defaultValue));
-                }
-            }
-        );
-    }
+import Home from "./pages/Home";
+import Info from "./pages/Info";
+import Profile from "./pages/Profile";
+import Setting from "./pages/Setting";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 
-    useEffect(() => {
-        load();
-        getAllFromFireStore();
-    }, []);
-
-    let userId = 'userId=1';
-
-    function getUserData() {
-        axios({
-            method: 'get',
-            url: `https://jsonplaceholder.typicode.com/todos?${userId}`,
-        }).then((response) => {
-            console.log(response);
-            console.log(response.data);
-        });
-    }
-
-    async function getAllFromFireStore() {
-        let APIKEY = 'YOUR_API_KEY';
-        const loginResponse = await fetch(
-            `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${APIKEY}`,
-            {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    "email": "YOUR_EMAIL",
-                    "password": "YOUR_PASSWORD",
-                    "returnSecureToken": true
-                })
-            });
-        const loginResult = await loginResponse.json();
-
-        console.log('Here is the login response ', loginResult);
-
-        const getDataResponse = await fetch(
-            `https://cs303-2022-default-rtdb.firebaseio.com/.json?auth=${loginResult.idToken}`);
-
-        const getDataResult = await getDataResponse.json();
-
-        console.log('here is the data ', getDataResult);
-    }
-
+function Menu() {
     return (
-        <ScrollView style={{padding: 30}}>
-
-            <View style={[styles.containerAct, styles.horizontalAct]}>
-                <ActivityIndicator animating={data.length === 0}/>
-                <ActivityIndicator size="large" animating={data.length === 0}/>
-                <ActivityIndicator size="small" color="#0000ff" animating={data.length === 0}/>
-                <ActivityIndicator size="large" color="#00ff00" animating={data.length === 0}/>
-            </View>
-
-            <Button title={"Click on Me"} onPress={ButtonClickOnMe}></Button>
-
-            {data.map((e, index) => (<Item text={e.text} iconScr={e.iconScr} key={index}/>))}
-
-            <StatusBar style="auto"></StatusBar>
-        </ScrollView>
+        <Tab.Navigator>
+            <Tab.Screen name="Home" component={Home}/>
+            <Tab.Screen name="Info" component={Info}/>
+            <Tab.Screen name="Profile" component={Profile}/>
+            <Tab.Screen name="Setting" component={Setting}/>
+        </Tab.Navigator>
     );
-
-    async function ButtonClickOnMe() {
-        AsyncStorage.removeItem(key);
-        setDate([]);
-        console.log("Before sleep");
-        await sleep(5000);
-        console.log("After sleep");
-        load();
-    }
-
-    function sleep(ms) {
-        return new Promise((resolve) => {
-            setTimeout(resolve, ms);
-        });
-    }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    containerAct: {
-        flex: 1,
-        justifyContent: "center"
-    },
-    horizontalAct: {
-        flexDirection: "row",
-        justifyContent: "space-around",
-        padding: 10
-    }
-});
+
+export default function App() {
+    return (
+
+        <NavigationContainer>
+
+            {/*<Tab.Navigator>*/}
+            {/*    <Tab.Screen name="Home" component={Home}/>*/}
+            {/*    <Tab.Screen name="Info" component={Info}/>*/}
+            {/*    <Tab.Screen name="Profile" component={Profile}/>*/}
+            {/*    <Tab.Screen name="Setting" component={Setting}/>*/}
+            {/*</Tab.Navigator>*/}
+
+
+            <Stack.Navigator initialRouteName="SignIn">
+                <Stack.Screen name="Menu" component={Menu}/>
+                <Stack.Screen name="SignIn" component={SignIn}/>
+                <Stack.Screen name="SignUp" component={SignUp}/>
+            </Stack.Navigator>
+
+
+            {/*<Stack.Navigator initialRouteName="SignIn">*/}
+            {/*    /!*<Stack.Screen name="Home" component={Home} options={{ title: 'my home page' }}/>*!/*/}
+            {/*    /!*<Stack.Screen name="Info" component={Info}/>*!/*/}
+            {/*    /!*<Stack.Screen name="Profile" component={Profile}/>*!/*/}
+            {/*    /!*<Stack.Screen name="Setting" component={Setting}/>*!/*/}
+            {/*    <Stack.Screen name="SignIn" component={SignIn}/>*/}
+            {/*    <Stack.Screen name="SignUp" component={SignUp}/>*/}
+            {/*</Stack.Navigator>*/}
+        </NavigationContainer>
+
+        // <ScrollView style={{padding: 30}}>
+        //
+        //     <View style={{padding: 10}}>
+        //         <Home/>
+        //     </View>
+        //
+        //     <View style={{padding: 10}}>
+        //         <Info/>
+        //     </View>
+        //
+        //     <View style={{padding: 10}}>
+        //         <Profile/>
+        //     </View>
+        //
+        //     <View style={{padding: 10}}>
+        //         <Setting/>
+        //     </View>
+        //
+        //     <View style={{padding: 10}}>
+        //         <SignIn/>
+        //     </View>
+        //
+        //     <View style={{padding: 10}}>
+        //         <SignUp/>
+        //     </View>
+        //
+        // </ScrollView>
+    );
+}
+
+const styles = StyleSheet.create({});

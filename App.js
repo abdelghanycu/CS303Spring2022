@@ -23,17 +23,20 @@ import Profile from "./pages/Profile";
 import Setting from "./pages/Setting";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import Page1, {routeName as page1route} from "./pages/Page1";
+import Page2, {routeName as page2route} from "./pages/Page2";
+import Page3, {routeName as page3route} from "./pages/Page3";
 
-function Menu() {
-    return (
-        <Tab.Navigator>
-            <Tab.Screen name="Home" component={Home}/>
-            <Tab.Screen name="Info" component={Info}/>
-            <Tab.Screen name="Profile" component={Profile}/>
-            <Tab.Screen name="Setting" component={Setting}/>
-        </Tab.Navigator>
-    );
-}
+// function Menu() {
+//     return (
+//         <Tab.Navigator>
+//             <Tab.Screen name="Home" component={Home}/>
+//             <Tab.Screen name="Info" component={Info}/>
+//             <Tab.Screen name="Profile" component={Profile}/>
+//             <Tab.Screen name="Setting" component={Setting}/>
+//         </Tab.Navigator>
+//     );
+// }
 
 
 export default function App() {
@@ -49,10 +52,12 @@ export default function App() {
             {/*</Tab.Navigator>*/}
 
 
-            <Stack.Navigator initialRouteName="SignIn">
-                <Stack.Screen name="Menu" component={Menu}/>
-                <Stack.Screen name="SignIn" component={SignIn}/>
-                <Stack.Screen name="SignUp" component={SignUp}/>
+            <Stack.Navigator initialRouteName={page1route}>
+                {/*<Stack.Screen name="Menu" component={Menu}/>*/}
+                {/*<Stack.Screen name="SignIn" component={SignIn}/>*/}
+                <Stack.Screen name={page1route} component={Page1}/>
+                <Stack.Screen name={page2route} component={Page2}/>
+                <Stack.Screen name={page3route} component={Page3}/>
             </Stack.Navigator>
 
 

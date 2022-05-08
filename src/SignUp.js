@@ -2,7 +2,7 @@ import {StatusBar} from 'expo-status-bar';
 import {Button, ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
 import {useEffect, useState} from 'react';
 import {register, getUserUId} from "../firebase/Auth";
-import {addUser} from "../firebase/User";
+import {addUser, getUserById} from "../firebase/User";
 
 const routeName = 'SignUp';
 
@@ -17,9 +17,13 @@ export default function SignUp({navigation}) {
         if (email === '' || password === '') {
             alert("email or password is empty!");
         } else {
-            register(email, password).then((user) => {
-                // console.log(getUserUId())
-                addUser({id: getUserUId(), email, password});
+            register(email, password).then(() => {
+                console.log(getUserUId());
+
+                getUserUId().then((id) => {
+                    // console.log(id);
+                    addUser({id: id, email, password});
+                });
                 navigation.navigate('SignIn');
             }).catch((e) => {
                 console.log(e.message)

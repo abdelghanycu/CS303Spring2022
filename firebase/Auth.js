@@ -1,5 +1,5 @@
 import {app} from "./Config";
-import {onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth} from "firebase/auth";
+import {onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, sendSignInLinkToEmail} from "firebase/auth";
 
 const authentication = getAuth(app);
 
@@ -10,6 +10,9 @@ const authentication = getAuth(app);
 //     }
 //     console.log('isSignedIn=', isSignedIn())
 // });
+
+
+
 
 async function isSignedIn() {
     console.log('from isSignedIn method: ', authentication.currentUser);
@@ -37,6 +40,8 @@ async function register(email, password) {
 }
 
 async function login(email, password) {
+
+    sendPasswordResetEmail(authentication, 'amabdelghany@sci.cu.edu.eg');
     console.log('login method with email=', email, ' and password=', password)
     await signInWithEmailAndPassword(authentication, email, password);
 }

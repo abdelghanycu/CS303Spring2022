@@ -6,6 +6,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import SignIn, {routeName as signInRoute} from "./src/SignIn";
 import SignUp, {routeName as signUpRoute} from "./src/SignUp";
 import Home, {routeName as homeRoute} from "./src/Home";
+import ForgetPassword, {routeName as forgetPasswordRoute} from "./src/ForgetPassword";
 import Profile, {routeName as profileRoute} from "./src/Profile";
 import {AuthContext} from "./src/Utils";
 
@@ -83,6 +84,7 @@ export default function App({navigation}) {
                         <>
                             <Stack.Screen name={signInRoute} component={SignIn}/>
                             <Stack.Screen name={signUpRoute} component={SignUp}/>
+                            <Stack.Screen name={forgetPasswordRoute} component={ForgetPassword}/>
                         </>
                     ) : (
                         <>

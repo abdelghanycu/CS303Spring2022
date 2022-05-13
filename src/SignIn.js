@@ -58,6 +58,10 @@ export default function SignIn({navigation}) {
                 <Button title='Create new account' onPress={() => navigation.navigate('SignUp')}/>
             </View>
 
+            <View style={{padding: 30}}>
+                <Button title='Forget Password' onPress={() => navigation.navigate('ForgetPassword')}/>
+            </View>
+
             <StatusBar style="auto"/>
         </ScrollView>
     );
